@@ -1,0 +1,62 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self'">
+<title>Twenty-One</title>
+<style>
+/* Twenty-One's own notification card (notice-main.cjs): for a message you set to Card, or when the island is out of sight. */
+@font-face { font-family: 'Inter'; font-weight: 100 900; src: url(./assets/fonts/inter-latin-opsz-normal.woff2) format('woff2-variations'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 100 800; src: url(./assets/fonts/jetbrains-mono-latin-wght-normal.woff2) format('woff2-variations'); }
+html, body { margin: 0; background: transparent; overflow: hidden; color: #fff; font-family: Inter, "Segoe UI", sans-serif; user-select: none; }
+* { box-sizing: border-box; }
+#wrap { padding: 8px 24px 40px; }
+.ow { width: 364px; border-radius: 20px; border: 1px solid rgba(255,255,255,.14); padding: 13px 14px; display: flex; gap: 12px; box-shadow: 0 14px 34px rgba(0,0,0,.55); cursor: pointer; background-repeat: no-repeat; animation: rise .26s cubic-bezier(.2,.9,.3,1) both; }
+.ow.out { animation: leave .17s ease-in both; }
+@keyframes rise { from { opacity: 0; transform: translateY(-8px) scale(.98); } }
+@keyframes leave { to { opacity: 0; transform: translateY(-6px) scale(.98); } }
+@media (prefers-reduced-motion: reduce) { .ow, .ow.out { animation: none; } }
+svg { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.tx { flex: 1; min-width: 0; }
+.h1 { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.t { font-size: 14.5px; line-height: 19px; font-weight: 700; letter-spacing: -.01em; min-width: 0; overflow-wrap: anywhere; }
+.r { font: 500 12.5px/19px "JetBrains Mono", Consolas, monospace; flex: none; margin-left: auto; }
+.x { width: 19px; height: 19px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.6); border: 0; background: none; padding: 0; cursor: pointer; flex: none; }
+.x:hover { color: #fff; }
+.b { margin-top: 2px; font-size: 12.5px; line-height: 17px; font-weight: 500; color: rgba(255,255,255,.8); overflow-wrap: anywhere; }
+.bt { display: flex; gap: 6px; margin-top: 9px; }
+.bt button { height: 28px; padding: 0 12px; border: 0; border-radius: 8px; font: 600 12px Inter, "Segoe UI", sans-serif; background: rgba(255,255,255,.14); color: #fff; cursor: pointer; transition: background .15s, transform .1s ease-out; }
+.bt button:hover { background: rgba(255,255,255,.22); }
+.bt button.y { background: #fff; color: #000; }
+.bt button.y:hover { background: #e5e5ea; }
+.bt button:active { transform: scale(.96); }
+</style><script src="./lang-pack.js"></script><script>window.__twocodePack.watch()</script></head>
+<body><div id="wrap"></div>
+<script src="./notice-icons.js"></script>
+<script>
+const wrap = document.getElementById('wrap'), make = (tag, cls, text) => { const el = document.createElement(tag); if (cls) el.className = cls; if (text != null) el.textContent = text; return el; };
+const svg = (id, size) => { const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); s.setAttribute('width', size); s.setAttribute('height', size); s.setAttribute('viewBox', '0 0 24 24'); s.setAttribute('aria-hidden', 'true'); const doc = new DOMParser().parseFromString(`<svg xmlns="http://www.w3.org/2000/svg">${window.TC_NOTICE_ICONS[id] || ''}</svg>`, 'image/svg+xml'); for (const part of [...doc.documentElement.children]) s.appendChild(document.importNode(part, true)); return s; };
+let timer = null, endAt = 0, hovering = false, leaving = null;
+// it fades out instead of being gone at once; then the island hears what you pressed
+const leave = (card, index) => { if (leaving) return; card.classList.add('out'); leaving = setTimeout(() => { leaving = null; window.noticeCard.choose(index); }, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 170); };
+function show(d) {
+  // (hovering stays on when the card hides under your mouse: the next card then never went away)
+  hovering = false; clearTimeout(leaving); leaving = null; wrap.textContent = ''; clearInterval(timer);
+  const c = d.rgb || '110,110,128', card = make('div', 'ow'); card.setAttribute('role', 'status');
+  const alpha = Number(d.alpha), under = alpha >= 0 && alpha < 1 ? `rgba(10,10,11,${alpha.toFixed(3)})` : '#0a0a0b'; // see-through like the island (Settings → Island → See-through)
+  card.style.background = `radial-gradient(56% 150% at 0% 50%,rgba(${c},.85) 0,rgba(${c},.24) 55%,transparent 88%),${under}`;
+  const ic = svg(d.ic, 21); ic.style.marginTop = '1px'; card.appendChild(ic);
+  const tx = make('div', 'tx'), h1 = make('div', 'h1'); h1.appendChild(make('div', 't', d.title));
+  if (d.right) h1.appendChild(make('div', 'r', d.right));
+  const x = make('button', 'x'); x.type = 'button'; x.setAttribute('aria-label', 'Close'); x.appendChild(svg('close', 13));
+  x.addEventListener('click', e => { e.stopPropagation(); leave(card, -2); }); h1.appendChild(x); tx.appendChild(h1);
+  if (d.body) tx.appendChild(make('div', 'b', d.body));
+  if (d.btns?.length) { const bt = make('div', 'bt'); d.btns.forEach((b, i) => { const el = make('button', b.primary ? 'y' : '', b.label); el.type = 'button'; el.addEventListener('click', e => { e.stopPropagation(); leave(card, i); }); bt.appendChild(el); }); tx.appendChild(bt); }
+  card.appendChild(tx); card.addEventListener('click', () => leave(card, -1));
+  card.addEventListener('mouseenter', () => { hovering = true; }); card.addEventListener('mouseleave', () => { hovering = false; });
+  wrap.appendChild(card);
+  window.noticeCard.size(wrap.offsetHeight);
+  endAt = d.stay ? performance.now() + d.stay * 1000 : 0; // (0: until it is answered)
+  if (endAt) timer = setInterval(() => { if (hovering) endAt = Math.max(endAt, performance.now() + 1500); if (performance.now() > endAt) { clearInterval(timer); leave(card, -2); } }, 200);
+}
+window.noticeCard?.onData(show);
+</script>
+</body></html>

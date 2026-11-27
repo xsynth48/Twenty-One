@@ -1,0 +1,46 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Robo listens</title></head><body>
+<script type="module">
+// Robo listens inside Twenty-One (speech-main.cjs opens this page in a hidden window): Whisper through transformers.js
+// (vendor/transformers.min.js, Apache-2.0) on the GPU (WebGPU) or else the CPU (WASM). Nothing here is a separate
+// program, so Windows' Smart App Control has nothing to block (it blocked whisper.cpp's unsigned ggml.dll, 11 Nov 2026).
+// The model comes once from Hugging Face at a fixed version and stays in Twenty-One's cache.
+// The user's test on 11 Nov (decoder q4 then): GPU 168 MB, ~0.8 s a sentence (the first one 2.4 s: the warm-up below takes that);
+// CPU 80 MB, ~3 s. Both wrote "Robo, open Google en dan YouTube." right.
+import { pipeline, env } from './vendor/transformers.min.js';
+env.allowLocalModels = false;
+const MODEL = 'onnx-community/whisper-base', REVISION = '27a07b4b52b3a4c5886134bb4320e93e1a4bbc7c';
+let asr = null, loading = null;
+window.__got = 0; window.__total = 0; window.__device = '';
+async function make(device) {
+  // beta 125: the GPU decoder is fp16 (146 MB in all, was q4: 165 MB, and q4 wrote the user's Dutch as "Heen oboekers met each
+  // open."). whisper-small would hear better still but is 486 MB on the GPU; Robo Plus users get Whisper large on the server.
+  const dtype = device === 'webgpu' ? { encoder_model: 'fp16', decoder_model_merged: 'fp16' } : { encoder_model: 'q8', decoder_model_merged: 'q8' }, seen = {};
+  const p = await pipeline('automatic-speech-recognition', MODEL, { revision: REVISION, device, dtype, progress_callback: e => {
+    if (e.status === 'progress' && e.total) { seen[e.file] = [e.loaded, e.total]; const v = Object.values(seen); window.__got = v.reduce((a, x) => a + x[0], 0); window.__total = v.reduce((a, x) => a + x[1], 0); }
+  } });
+  await p(new Float32Array(8000), { language: 'english', task: 'transcribe' }); // warm-up: the GPU builds its programs once
+  return p;
+}
+window.load = () => {
+  if (asr) return Promise.resolve({ ok: true, device: window.__device });
+  if (!loading) loading = (async () => {
+    let gpu = false; try { gpu = Boolean(await navigator.gpu?.requestAdapter()); } catch {}
+    try { asr = await make(gpu ? 'webgpu' : 'wasm'); window.__device = gpu ? 'webgpu' : 'wasm'; }
+    catch (e) { if (!gpu) throw e; asr = await make('wasm'); window.__device = 'wasm'; } // a GPU that fails: the CPU
+    // (beta 125) the q4 decoder of before stays in the cache for nothing: 124 MB, so it goes
+    try { const c = await caches.open('transformers-cache'); for (const q of await c.keys()) if (/decoder_model_merged_q4.onnx/.test(q.url)) await c.delete(q); } catch {}
+    return { ok: true, device: window.__device };
+  })().catch(e => { loading = null; return { ok: false, error: String(e?.message || e).slice(0, 200) }; });
+  return loading;
+};
+// 16 kHz mono 16-bit PCM in base64 → text
+window.hear = async (b64, language) => {
+  const r = await window.load(); if (!r.ok) return r;
+  const bin = atob(b64), bytes = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  const s = new Int16Array(bytes.buffer, 0, bytes.length >> 1), audio = new Float32Array(s.length); for (let i = 0; i < s.length; i++) audio[i] = s[i] / 32768;
+  const t = performance.now(), out = await asr(audio, { language, task: 'transcribe' });
+  return { ok: true, text: String(out?.text || ''), ms: Math.round(performance.now() - t), device: window.__device };
+};
+window.ready = true;
+</script></body></html>

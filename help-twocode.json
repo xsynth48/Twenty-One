@@ -1,0 +1,217 @@
+{
+  "_about": "What Robo knows about Twenty-One itself (buddy-main.cjs, since beta 54). handbook: given to the user's own AI (Claude Code / Codex) with a question about Twenty-One. faq: answered without an AI (none connected). Keep it true: when Twenty-One changes, change this too.",
+  "contact": "support@twocode.nl",
+  "handbook": "TWENTY-ONE HANDBOOK (facts you may use; never invent anything that is not here)\n\nWhat it is: Twenty-One is a Dynamic Island for Windows, made by Levon (one person) at twocode.nl. Robo, a small robot, lives in a bar at the top of the screen. It shows: Claude Code and Codex at work (Robo's eyes: orange = busy or a question, blue = done, green = you looked at it), your music (Spotify) in colour with lyrics, a focus timer, the time, battery, CPU and RAM, a tray for files, clipboard history, notes and a clock. Robo Buddy: drag Robo out of the island onto anything on your screen and ask about it. Robo Chat answers with the AI you connected (Claude Code or Codex). Focus guard stops you for a moment on distracting sites. Wardrobe: outfits for Robo. Wi-Fi and Bluetooth (since beta 55): on Home, top left, click the Wi-Fi and Bluetooth signs; a small panel switches Wi-Fi and Bluetooth on or off (blue = on) and shows your network and the connected Bluetooth device; 'Wi-Fi networks' and 'Bluetooth devices' open Windows' own lists to pick another network or pair a device. If Windows does not let Twenty-One switch it, the block says so and Windows' own settings open. The resting island can show the Wi-Fi and Bluetooth signs left or right of Robo (Settings → Island). Files to and from your phone (since beta 56, like AirDrop): open the island's tray page (File Tray) and click Phone (the phone button at the top, or the Phone tile next to your files). Scan the QR code with your phone's camera and tap the link. Everything in the tray is on your phone (tap Save; on an iPhone choose Save Image or Save to Files), and 'Send to PC' on your phone sends photos and files to the PC: they land in Downloads and in the tray. Works on iPhone and Android, on any network (also 4G), through twocode.nl, end-to-end encrypted (not even Twenty-One can see the files), files up to 500 MB, and a code works for an hour. Stop ends it. Ctrl+Alt+T opens the island's Home (the keys can be changed in Settings → General → Shortcuts). Settings: click the Twenty-One icon in the system tray (bottom right, next to the clock) → Settings.\n\nPrice and account: downloading is free. Twenty-One costs 9.99 euro once (or the local price shown), no subscription, yours forever with every update, on up to 3 PCs at the same time. The first question after installing is your account: 'Create account · 9.99' opens Stripe; after paying you only choose a password in Twenty-One and you are signed in. Already have an account: 'I already have an account' and sign in with e-mail + password (Settings → Account). Bought on the website, or got Twenty-One as a gift from us: in Settings → Account click 'Bought it on the website or got it from us? Make your account', use that e-mail address, choose a password and click the link in the mail. Forgot password: Settings → Account → Forgot password? (a link by mail). On another PC: download Twenty-One and sign in. Signed in on 3 PCs already: sign out on one, or choose 'Use this PC (sign the others out)'. Signing out frees that PC's place.\n\nFounders: everyone who had Twenty-One during the free beta, before 30 October 2026, is a Founder: free forever. A Founder's Twenty-One knows it by itself; make your free account (Settings → Account) to use it on your other PCs too. Installed after 30 October: Twenty-One is 9.99 once. Questions about Founder status: mail support@twocode.nl.\n\nInstalling: twocode.nl → Download → open Twenty-One-Setup.exe. Windows may say 'Windows protected your PC' because Twenty-One is new and not signed yet: click 'More info' → 'Run anyway'. Smart App Control (Windows 11) can block apps that are not signed yet; then mail support@twocode.nl.\n\nUpdates: Twenty-One updates itself. An old version that says it cannot reach twocode.nl: download the newest one at twocode.nl → Download and install it over the old one; your settings and Founder status stay.\n\nClaude Code and Codex: connect them in Settings → Connections. Claude Code needs Claude Code on your PC (type claude in PowerShell and sign in once) and a paid Claude plan (Pro or Max); with a free Claude account it does not work, use Codex then. Codex: sign in with ChatGPT once in Robo Chat. The Codex error 'failed to decrypt secrets file': update Twenty-One and click 'Sign in with ChatGPT' once more.\n\nUninstall: Windows Settings → Apps → Twenty-One → Uninstall (tick 'Also delete my Twenty-One settings' to remove everything).\n\nRefunds, payment problems, bugs, ideas and anything not in this handbook: mail support@twocode.nl (Levon answers himself). Instagram: @twocode.nl.",
+  "faq": [
+    {
+      "keys": [
+        "price",
+        "cost",
+        "how much",
+        "9.99",
+        "9,99",
+        "euro",
+        "€",
+        "prijs",
+        "kost",
+        "kosten",
+        "hoeveel",
+        "abonnement",
+        "subscription"
+      ],
+      "en": "Twenty-One is **€9.99 once**: no subscription, yours forever with every update, on up to 3 PCs. Downloading is free; you pay when you make your account in Twenty-One (Settings → Account → Create account).",
+      "nl": "Twenty-One kost **€9,99, één keer**: geen abonnement, voor altijd van jou met elke update, op maximaal 3 pc's. Downloaden is gratis; je betaalt als je je account maakt in Twenty-One (Instellingen → Account → Account maken)."
+    },
+    {
+      "keys": [
+        "account",
+        "sign in",
+        "sign up",
+        "log in",
+        "login",
+        "inlog",
+        "inloggen",
+        "aanmaken",
+        "create account",
+        "register",
+        "registr"
+      ],
+      "en": "Open **Settings → Account**. New: **Create account · €9.99** (pay, then choose a password). Already have one: sign in with your e-mail and password. Bought it on the website or got it from us? Click \"Bought it on the website or got it from us? Make your account\" and use that e-mail.",
+      "nl": "Open **Instellingen → Account**. Nieuw: **Account maken · €9,99** (betalen, daarna een wachtwoord kiezen). Heb je er al een: log in met je e-mail en wachtwoord. Gekocht op de website of van ons gekregen? Klik \"Gekocht op de website of van ons gekregen? Maak je account\" en gebruik dat e-mailadres."
+    },
+    {
+      "keys": [
+        "founder",
+        "beta",
+        "tester",
+        "tested",
+        "free forever",
+        "for free",
+        "gratis",
+        "voor altijd"
+      ],
+      "en": "Everyone who had Twenty-One during the free beta (before 30 October 2026) is a **Founder**: free forever. Your Twenty-One knows it by itself; make your free account in Settings → Account to use it on your other PCs. Installed later and think you are a Founder? Mail **support@twocode.nl**.",
+      "nl": "Iedereen die Twenty-One had tijdens de gratis beta (vóór 30 oktober 2026) is **Founder**: voor altijd gratis. Je Twenty-One weet dat zelf; maak je gratis account in Instellingen → Account om hem ook op je andere pc's te gebruiken. Later geïnstalleerd en denk je dat je Founder bent? Mail **support@twocode.nl**."
+    },
+    {
+      "keys": [
+        "other pc",
+        "another pc",
+        "second pc",
+        "laptop",
+        "3 pc",
+        "three pc",
+        "andere pc",
+        "tweede pc",
+        "how many pc",
+        "hoeveel pc",
+        "sign the others out",
+        "already on 3",
+        "new pc",
+        "nieuwe pc",
+        "other computer",
+        "andere computer",
+        "my laptop",
+        "mijn laptop"
+      ],
+      "en": "Twenty-One works on **up to 3 PCs** at the same time. On another PC: download Twenty-One and sign in with your account. Already on 3? Sign out on one, or choose **Use this PC (sign the others out)**.",
+      "nl": "Twenty-One werkt op **maximaal 3 pc's** tegelijk. Op een andere pc: download Twenty-One en log in met je account. Al op 3? Log uit op één ervan, of kies **Gebruik deze pc (log de andere uit)**."
+    },
+    {
+      "keys": [
+        "forgot",
+        "reset",
+        "vergeten",
+        "new password",
+        "nieuw wachtwoord",
+        "forgot my password",
+        "password vergeten",
+        "wachtwoord vergeten",
+        "forgot password",
+        "lost my password"
+      ],
+      "en": "Go to **Settings → Account → Forgot password?**, type your e-mail and click the link in the mail to choose a new password.",
+      "nl": "Ga naar **Instellingen → Account → Wachtwoord vergeten?**, vul je e-mail in en klik op de link in de mail om een nieuw wachtwoord te kiezen."
+    },
+    {
+      "keys": [
+        "install",
+        "installeren",
+        "windows protected",
+        "smartscreen",
+        "run anyway",
+        "defender",
+        "blocked",
+        "geblokkeerd",
+        "smart app control",
+        "unknown publisher"
+      ],
+      "en": "Download at **twocode.nl → Download** and open Twenty-One-Setup.exe. Windows says \"Windows protected your PC\"? Click **More info → Run anyway** (Twenty-One is new and not signed yet). Smart App Control blocks it? Mail **support@twocode.nl**.",
+      "nl": "Download via **twocode.nl → Download** en open Twenty-One-Setup.exe. Zegt Windows \"Windows protected your PC\"? Klik **Meer info → Toch uitvoeren** (Twenty-One is nieuw en nog niet ondertekend). Blokkeert Smart App Control hem? Mail **support@twocode.nl**."
+    },
+    {
+      "keys": [
+        "update",
+        "updaten",
+        "bijwerken",
+        "old version",
+        "oude versie",
+        "couldn't reach",
+        "could not reach",
+        "can't update",
+        "newest version",
+        "nieuwste versie"
+      ],
+      "en": "Twenty-One updates itself. If an old version can't update (\"couldn't reach twocode.nl\"), download the newest at **twocode.nl → Download** and install it over the old one. Your settings and Founder status stay.",
+      "nl": "Twenty-One werkt zichzelf bij. Lukt dat niet bij een oude versie (\"couldn't reach twocode.nl\")? Download de nieuwste via **twocode.nl → Download** en installeer hem over de oude heen. Je instellingen en Founder-status blijven."
+    },
+    {
+      "keys": [
+        "claude"
+      ],
+      "en": "Claude in Robo uses **Claude Code** with your own Claude account: open PowerShell, type `claude`, sign in once, and connect it in **Settings → Connections**. It needs a paid Claude plan (Pro or Max); with a free account, use Codex instead.",
+      "nl": "Claude in Robo gebruikt **Claude Code** met je eigen Claude-account: open PowerShell, typ `claude`, log één keer in en verbind het in **Instellingen → Verbindingen**. Je hebt een betaald Claude-abonnement nodig (Pro of Max); met een gratis account gebruik je Codex."
+    },
+    {
+      "keys": [
+        "codex",
+        "chatgpt",
+        "openai",
+        "decrypt"
+      ],
+      "en": "Codex: sign in with ChatGPT once in Robo Chat. The error \"failed to decrypt secrets file\"? Update Twenty-One and click **Sign in with ChatGPT** once more.",
+      "nl": "Codex: log één keer in met ChatGPT in Robo Chat. De fout \"failed to decrypt secrets file\"? Werk Twenty-One bij en klik nog één keer op **Sign in with ChatGPT**."
+    },
+    {
+      "keys": [
+        "uninstall",
+        "remove",
+        "delete twocode",
+        "verwijder",
+        "verwijderen",
+        "deinstall"
+      ],
+      "en": "Windows **Settings → Apps → Twenty-One → Uninstall**. Tick \"Also delete my Twenty-One settings\" to remove everything.",
+      "nl": "Windows **Instellingen → Apps → Twenty-One → Verwijderen**. Vink \"Also delete my Twenty-One settings\" aan om alles weg te halen."
+    },
+    {
+      "keys": [
+        "shortcut",
+        "sneltoets",
+        "ctrl",
+        "open the island",
+        "eiland openen",
+        "keys"
+      ],
+      "en": "**Ctrl+Alt+T** opens the island's Home. You can change the keys in **Settings → General → Shortcuts**.",
+      "nl": "**Ctrl+Alt+T** opent de Home van het eiland. Je kunt de toetsen veranderen in **Instellingen → Algemeen → Sneltoetsen**."
+    },
+    {
+      "keys": [
+        "wifi",
+        "wi-fi",
+        "bluetooth",
+        "wlan",
+        "airpods",
+        "headphones",
+        "koptelefoon",
+        "oortjes"
+      ],
+      "en": "On **Home**, top left, click the **Wi-Fi and Bluetooth** signs: switch them on or off (blue = on) and see your network and connected device. **Wi-Fi networks** and **Bluetooth devices** open Windows' lists to pick a network or pair your headphones. Updated to beta 55 or newer? Then it is there.",
+      "nl": "Klik op **Home** linksboven op de tekens van **Wi-Fi en Bluetooth**: zet ze aan of uit (blauw = aan) en zie je netwerk en je verbonden apparaat. **Wi-Fi-netwerken** en **Bluetooth-apparaten** openen de lijsten van Windows om een netwerk te kiezen of je oortjes te koppelen. Het zit erin vanaf beta 55."
+    },
+    {
+      "keys": [
+        "phone",
+        "telefoon",
+        "airdrop",
+        "iphone",
+        "android",
+        "qr",
+        "to my phone",
+        "naar mijn telefoon",
+        "from my phone",
+        "van mijn telefoon",
+        "send files",
+        "bestanden sturen"
+      ],
+      "en": "Open the island's **File Tray** and click **Phone**. Scan the code with your phone's camera and tap the link: what's in the tray is on your phone (tap **Save**), and **Send to PC** on your phone sends photos and files to Downloads and the tray. End-to-end encrypted, works on any network. Since beta 56.",
+      "nl": "Open de **Bestandenlade** op het eiland en klik op **Telefoon**. Scan de code met de camera van je telefoon en tik op de link: wat in de lade staat, staat op je telefoon (tik op **Bewaar**), en met **Stuur naar pc** op je telefoon gaan foto's en bestanden naar Downloads en de lade. Versleuteld van begin tot eind, werkt op elk netwerk. Vanaf beta 56."
+    },
+    {
+      "keys": [
+        "refund",
+        "money back",
+        "terugbetal",
+        "geld terug",
+        "charged twice",
+        "twee keer betaald",
+        "invoice",
+        "factuur",
+        "receipt"
+      ],
+      "en": "For refunds, double payments, invoices and receipts, mail **support@twocode.nl**: Levon answers himself.",
+      "nl": "Voor geld terug, dubbel betaald, facturen en bonnetjes: mail **support@twocode.nl**. Levon antwoordt zelf."
+    }
+  ]
+}
